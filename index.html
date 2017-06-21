@@ -5,6 +5,7 @@
     <link href="style.css" type="text/css" rel="stylesheet" >
    <script>
 
+     
     function loadXMLDoc() {
       var xhttp = new XMLHttpRequest();
       
@@ -16,37 +17,34 @@
           var count = resp.response.results.length;
           var news = document.getElementById("news");
     
-       for(var i = 0; i < count; i++) {
-          headline = resp.response.results[i].webTitle;
-          category = resp.response.results[i].sectionName;
-          date = resp.response.results[i].webPublicationDate;
-          bodyText = resp.response.results[i].fields.bodyText;
+          for(var i = 0; i < count; i++) {
+            headline = resp.response.results[i].webTitle;
+            category = resp.response.results[i].sectionName;
+            date = resp.response.results[i].webPublicationDate;
+            
+            bodyText = resp.response.results[i].fields.bodyText;
          
-         var article = document.createElement("div");
-         var h = document.createElement("p");
-         var c = document.createElement("p");
-         var d = document.createElement("p");
+            var article = document.createElement("div");
+            var lineBreak = document.createElement("br");
+            var h = document.createElement("p");
+            var c = document.createElement("p");
+            var d = document.createElement("p");
          
-         h.setAttribute("class", "headline");
-         c.setAttribute("class", "category");
-         d.setAttribute("class", "date");
+            h.setAttribute("class", "headline");
+            c.setAttribute("class", "category");
+            d.setAttribute("class", "date");
          
-         h.innerHTML = headline;
-         c.innerHTML = category;
-         d.innerHTML = date;
+            h.innerHTML = headline;
+            c.innerHTML = category;
+            d.innerHTML = new Date(date).toUTCString();
          
-         news.appendChild(article); 
-         article.appendChild(d);
-         article.appendChild(c);
-         article.appendChild(h);
-         
-        //  document.getElementById("headline").innerHTML = headline;
-        //  document.getElementById("category").innerHTML = category;
-        //  document.getElementById("date").innerHTML = date;
-         // document.getElementById("body-text").innerHTML = bodyText;
-        }
-         
-          
+            news.appendChild(article); 
+            article.appendChild(h);
+            article.appendChild(c);
+            article.appendChild(d);
+            article.appendChild(lineBreak);
+
+          }
         }
       };
       
@@ -62,14 +60,7 @@
 <h2>News</h2>
 
 <div id="news">
-<!--
-  <div class="article">
-    <p id="headline"></p>
-    <p id="category"></p>
-    <p id="date"></p>
-    <p id="body-text"></p>
-  </div>
--->
+
 
   
 </div>
