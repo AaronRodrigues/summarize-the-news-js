@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script>
+
+    function loadXMLDoc() {
+      var xhttp = new XMLHttpRequest();
+      
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          
+          var resp = JSON.parse(this.responseText);
+          var headline = resp.response.results[0].webTitle;
+          var category = resp.response.results[0].sectionName;
+          var date = resp.response.results[0].webPublicationDate;
+          var bodyText = resp.response.results[0].fields.bodyText;
+        
+          
+          document.getElementById("headline").innerHTML = headline;
+           document.getElementById("category").innerHTML = category;
+           document.getElementById("date").innerHTML = date;
+          document.getElementById("body-text").innerHTML = bodyText;
+          
+        }
+      };
+      
+      xhttp.open("GET", "http://content.guardianapis.com/search?show-fields=bodyText&api-key=fe308324-ad4f-4317-a3df-7329ed2b238b", true);
+      xhttp.send();
+    }
+   
+    </script>
+  
+  </head>
+<body onload="loadXMLDoc()">
+
+<h2>Using the XMLHttpRequest Object</h2>
+
+<div id="demo">
+  <p id="headline"></p>
+  <p id="category"></p>
+  <p id="date"></p>
+  <p id="body-text"></p>
+  
+</div>
+  
+  
+</body>
+</html>
