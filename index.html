@@ -4,7 +4,23 @@
     
     <link href="style.css" type="text/css" rel="stylesheet" >
    <script>
-
+     var API_KEY = "1eb0ccf89bbb379a3905a8df22bb438a";
+     var APP_ID = "36bbd38c";
+     
+    function textSummarize(text, headline) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+        }
+      };
+          xhttp.open("GET", "https://api.aylien.com/api/v1/summarize?title=" + headline +  "&text=" + text + "&sentences_number=3")
+          xhttp.setRequestHeader("X-AYLIEN-TextAPI-Application-Key", API_KEY);
+          xhttp.setRequestHeader("X-AYLIEN-TextAPI-Application-ID", APP_ID);
+          xhttp.send();
+      
+    }
      
     function loadXMLDoc() {
       var xhttp = new XMLHttpRequest();
@@ -21,14 +37,16 @@
             headline = resp.response.results[i].webTitle;
             category = resp.response.results[i].sectionName;
             date = resp.response.results[i].webPublicationDate;
-            
             bodyText = resp.response.results[i].fields.bodyText;
-         
+            
+         textSummarize(bodyText, headline);
+            
             var article = document.createElement("div");
             var lineBreak = document.createElement("br");
             var h = document.createElement("p");
             var c = document.createElement("p");
             var d = document.createElement("p");
+            var url = document.createElement("p");
          
             h.setAttribute("class", "headline");
             c.setAttribute("class", "category");
