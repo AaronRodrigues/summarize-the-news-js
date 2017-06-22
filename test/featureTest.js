@@ -16,8 +16,8 @@ function checkNewsOnPage() {
 };
 
 function checkHeadlinesOnPage() {
-  var headlines = document.getElementById("news").children;
-  assert.isTrue(headlines[0].className === "headline", arguments.callee.name)
+  var headlines = document.getElementsByClassName("headline");
+  assert.isTrue(headlines.length > 0, arguments.callee.name)
 };
 
 (function(exports) {

@@ -24,36 +24,45 @@
             headline = resp.response.results[i].webTitle;
             category = resp.response.results[i].sectionName;
             date = resp.response.results[i].webPublicationDate;
+            // replace the string below with the summary string from Aylien
+            summary = "This is a placeholder text for the awesome summary!"
 
             bodyText = resp.response.results[i].fields.bodyText;
 
-            var article = document.createElement("div");
+            var article = document.createElement("article");
+            var textContent = document.createElement("details");
             var lineBreak = document.createElement("br");
-            var h = document.createElement("p");
+            var h = document.createElement("summary");
             var c = document.createElement("p");
-            var d = document.createElement("p");
+            var s = document.createElement("p");
+            // var d = document.createElement("p");
 
             h.setAttribute("class", "headline");
             c.setAttribute("class", "category");
-            d.setAttribute("class", "date");
+            article.setAttribute("class", "article")
+            // d.setAttribute("class", "date");
 
             h.innerHTML = headline;
-            c.innerHTML = category;
-            d.innerHTML = new Date(date).toUTCString();
+            c.innerHTML = category + " - " + new Date(date).toUTCString();
+            s.innerHTML = summary;
+            // d.innerHTML = ""
 
             news.appendChild(article);
-            article.appendChild(h);
             article.appendChild(c);
-            article.appendChild(d);
-            article.appendChild(lineBreak);
+            article.appendChild(textContent);
+            // news.appendChild(d);
+            textContent.appendChild(h);
+            textContent.appendChild(s);
+            news.appendChild(lineBreak);
 
           }
+          callback();
         }
       };
 
       xhttp.open("GET", "http://content.guardianapis.com/search?show-fields=bodyText&api-key=fe308324-ad4f-4317-a3df-7329ed2b238b", true);
       xhttp.send();
-      callback();
+
     }
 
     </script>
@@ -61,10 +70,17 @@
 </head>
 <body onload="loadXMLDoc(executeTests)">
 
+
+
   <h1 id="header">See the latest news!</h1>
   <div id="news">
-    <p class="headline"></p>
+    <!-- <p>date - category</p>
+    <details>
+      <summary class="headline">Hello Test</summary>
+      <p>this is the very very very very long text</p>
+    </details> -->
   </div>
+
   <script src="test/featureTest.js" type="text/javascript"></script>
 
 
