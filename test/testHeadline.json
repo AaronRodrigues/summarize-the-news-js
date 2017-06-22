@@ -1,0 +1,26 @@
+
+{"response":
+  {
+    "status":"ok",
+    "userTier":"developer",
+    "total":1959953,
+    "startIndex":1,
+    "pageSize":10,
+    "currentPage":1,
+    "pages":195996,
+    "orderBy":"newest",
+    "results":[{
+      "id":"politics/blog/live/2017/jun/21/queens-speech-2017-theresa-may-promises-humility-and-resolve-as-she-publishes-legislative-programme-politics-live",
+      "type":"liveblog",
+      "sectionId":"politics",
+      "sectionName":"TestSection",
+      "webPublicationDate":"Doom Day",
+      "webTitle":"This is the test headline",
+      "webUrl":"https://www.theguardian.com/politics/blog/live/2017/jun/21/queens-speech-2017-theresa-may-promises-humility-and-resolve-as-she-publishes-legislative-programme-politics-live",
+      "apiUrl":"https://content.guardianapis.com/politics/blog/live/2017/jun/21/queens-speech-2017-theresa-may-promises-humility-and-resolve-as-she-publishes-legislative-programme-politics-live",
+      "fields":{
+        "bodyText":"This is the body text which is super super long and therefore has to be shortenend down"},
+      "isHosted":false
+      }]
+    }
+  }
