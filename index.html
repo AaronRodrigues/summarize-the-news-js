@@ -4,13 +4,70 @@
     <meta charset="utf-8">
     <title>The amazing news summary page</title>
     <script src="https://rawgit.com/rogrenke/testFramework-js/master/helpers.js" type="text/javascript"></script>
-  </head>
-  <body>
-    <h1 id="header">See the latest news!</h1>
-    <div class="news">
-      <p class="headline"></p>
+    
+    <link href="style.css" type="text/css" rel="stylesheet" >
+   <script>
 
-    </div>
-    <script src="test/featureTest.js" type="text/javascript"></script>
-  </body>
+     
+    function loadXMLDoc() {
+      var xhttp = new XMLHttpRequest();
+      
+      xhttp.onreadystatechange = function() {
+        
+        if (this.readyState == 4 && this.status == 200) {
+          var headline, category, date, bodyText;
+          var resp = JSON.parse(this.responseText);
+          var count = resp.response.results.length;
+          var news = document.getElementById("news");
+    
+          for(var i = 0; i < count; i++) {
+            headline = resp.response.results[i].webTitle;
+            category = resp.response.results[i].sectionName;
+            date = resp.response.results[i].webPublicationDate;
+            
+            bodyText = resp.response.results[i].fields.bodyText;
+         
+            var article = document.createElement("div");
+            var lineBreak = document.createElement("br");
+            var h = document.createElement("p");
+            var c = document.createElement("p");
+            var d = document.createElement("p");
+         
+            h.setAttribute("class", "headline");
+            c.setAttribute("class", "category");
+            d.setAttribute("class", "date");
+         
+            h.innerHTML = headline;
+            c.innerHTML = category;
+            d.innerHTML = new Date(date).toUTCString();
+         
+            news.appendChild(article); 
+            article.appendChild(h);
+            article.appendChild(c);
+            article.appendChild(d);
+            article.appendChild(lineBreak);
+
+          }
+        }
+      };
+      
+      xhttp.open("GET", "http://content.guardianapis.com/search?show-fields=bodyText&api-key=fe308324-ad4f-4317-a3df-7329ed2b238b", true);
+      xhttp.send();
+    }
+   
+    </script>
+  
+</head>
+<body onload="loadXMLDoc()">
+
+  <h1 id="header">See the latest news!</h1>
+  <div class="news">
+    <p class="headline"></p>
+  </div>
+  <script src="test/featureTest.js" type="text/javascript"></script>
+ 
+  
+  
+</body>
 </html>
+
