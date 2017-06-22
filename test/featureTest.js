@@ -7,7 +7,7 @@ function checkHeadOnPage() {
 };
 
 function checkNewsOnPage() {
-  var news = document.getElementsByClassName("news");
+  var news = document.getElementById("news").children;
   if (news.length === 0) {
     throw new Error ("There are no news!");
   } else {
@@ -16,10 +16,15 @@ function checkNewsOnPage() {
 };
 
 function checkHeadlinesOnPage() {
-  var headlines = document.getElementsByClassName("news")[0].children;
+  var headlines = document.getElementById("news").children;
   assert.isTrue(headlines[0].className === "headline", arguments.callee.name)
 };
 
-checkHeadOnPage();
-checkNewsOnPage();
-checkHeadlinesOnPage();
+(function(exports) {
+  function executeTests() {
+    checkHeadOnPage();
+    checkNewsOnPage();
+    checkHeadlinesOnPage();
+  }
+  exports.executeTests = executeTests;
+})(this);
