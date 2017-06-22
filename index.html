@@ -7,27 +7,26 @@
 
   <link href="style.css" type="text/css" rel="stylesheet" >
   <script>
-    var sentences;
-     
+
     function loadXMLDoc(callbackTest) {
       var xhttp = new XMLHttpRequest();
       var API_KEY = "1eb0ccf89bbb379a3905a8df22bb438a";
       var APP_ID = "36bbd38c";
-         
+
      function textSummarize(url, callback) {
-       
+
       var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {  
+      xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           callback(JSON.parse(this.responseText).sentences);
         }
-        
+
       };
-      
-      xhttp.open("GET", "http://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url=" + url, true);
+
+        xhttp.open("GET", "http://our-news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url=" + url, true);
       xhttp.send();
     }
-      
+
       xhttp.onreadystatechange = function() {
 
         if (this.readyState == 4 && this.status == 200) {
@@ -36,17 +35,19 @@
           var resp = JSON.parse(this.responseText);
           var count = resp.response.results.length;
           var news = document.getElementById("news");
-
+          console.log(1);
           for(var i = 0; i < count; i++) {
-            
+
             headline = resp.response.results[i].webTitle;
             category = resp.response.results[i].sectionName;
             date = resp.response.results[i].webPublicationDate;
-
+            console.log(2);
             url = resp.response.results[i].webUrl;
             bodyText = resp.response.results[i].fields.bodyText;
             textSummarize(url, function(response) {
-            
+              // console.log(response);
+              console.log(3)
+              summary = response.join(" ");
               var article = document.createElement("article");
               var textContent = document.createElement("details");
               var lineBreak = document.createElement("br");
@@ -71,16 +72,11 @@
               // news.appendChild(d);
               textContent.appendChild(h);
               textContent.appendChild(s);
-              
-              for(var n = 0; n < sentences.length; n++) {
-                var s = document.createElement("li");
-                s.innerHTML = sentences[n];
-                b.appendChild(s);
-              }
+
               article.appendChild(lineBreak);
             });
           }
-          }
+
           callbackTest();
         }
       };
