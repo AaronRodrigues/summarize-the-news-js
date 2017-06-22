@@ -15,11 +15,11 @@ function checkNewsOnPage() {
   }
 };
 
-// function checkNewsHasHeadline() {
-//   var headline = document.getElement
-// }
-// #1 check if there is elements of headlines list
-// #2
+function checkHeadlinesOnPage() {
+  var headlines = document.getElementsByClassName("news")[0].children;
+  assert.isTrue(headlines[0].className === "headline", arguments.callee.name)
+};
 
 checkHeadOnPage();
 checkNewsOnPage();
+checkHeadlinesOnPage();
