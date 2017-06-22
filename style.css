@@ -1,5 +1,7 @@
 .headline {
   color: darkblue;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .category {
