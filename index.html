@@ -2,33 +2,43 @@
 <html>
   <head>
     
-    <link href="style.css" type="text/css" rel="stylesheet" >
-   <script>
-     var API_KEY = "1eb0ccf89bbb379a3905a8df22bb438a";
-     var APP_ID = "36bbd38c";
-     
-    function textSummarize(text, headline) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        
-        if (this.readyState == 4 && this.status == 200) {
-          console.log(this.responseText);
-        }
-      };
-          xhttp.open("GET", "https://api.aylien.com/api/v1/summarize?title=" + headline +  "&text=" + text + "&sentences_number=3")
-          xhttp.setRequestHeader("X-AYLIEN-TextAPI-Application-Key", API_KEY);
-          xhttp.setRequestHeader("X-AYLIEN-TextAPI-Application-ID", APP_ID);
-          xhttp.send();
-      
-    }
+  <link href="style.css" type="text/css" rel="stylesheet" >
+  <script>
+    var sentences;
+    var test = 1;
+    console.log(test);
+    
+//    function callback(result) {
+//      sentences = result;
+//      test = 2;
+//      console.log(test);
+//    };
      
     function loadXMLDoc() {
       var xhttp = new XMLHttpRequest();
+      var API_KEY = "1eb0ccf89bbb379a3905a8df22bb438a";
+      var APP_ID = "36bbd38c";
+         
+     function textSummarize(url, callback) {
+       
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {  
+        if (this.readyState == 4 && this.status == 200) {
+          callback(JSON.parse(this.responseText).sentences[0]);
+        }
+        
+      };
+      
+      xhttp.open("GET", "http://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url=" + url, true);
+      xhttp.send();
+    }
+      
       
       xhttp.onreadystatechange = function() {
         
         if (this.readyState == 4 && this.status == 200) {
           var headline, category, date, bodyText;
+          var sentences;
           var resp = JSON.parse(this.responseText);
           var count = resp.response.results.length;
           var news = document.getElementById("news");
@@ -37,39 +47,45 @@
             headline = resp.response.results[i].webTitle;
             category = resp.response.results[i].sectionName;
             date = resp.response.results[i].webPublicationDate;
+            url = resp.response.results[i].webUrl;
             bodyText = resp.response.results[i].fields.bodyText;
-            
-         textSummarize(bodyText, headline);
-            
-            var article = document.createElement("div");
-            var lineBreak = document.createElement("br");
-            var h = document.createElement("p");
-            var c = document.createElement("p");
-            var d = document.createElement("p");
-            var url = document.createElement("p");
-         
-            h.setAttribute("class", "headline");
-            c.setAttribute("class", "category");
-            d.setAttribute("class", "date");
-         
-            h.innerHTML = headline;
-            c.innerHTML = category;
-            d.innerHTML = new Date(date).toUTCString();
-         
-            news.appendChild(article); 
-            article.appendChild(h);
-            article.appendChild(c);
-            article.appendChild(d);
-            article.appendChild(lineBreak);
+            textSummarize(url, function(response) {
+              
+              var article = document.createElement("div");
+              var lineBreak = document.createElement("br");
+              var sentences = response
+              var h = document.createElement("p");
+              var c = document.createElement("p");
+              var d = document.createElement("p");
+              var s = document.createElement("p");
+              var url = document.createElement("p");
+
+              h.setAttribute("class", "headline");
+              c.setAttribute("class", "category");
+              d.setAttribute("class", "date");
+              s.setAttribute("class", "sentences")
+
+              h.innerHTML = headline;
+              c.innerHTML = category;
+              s.innerHTML = sentences;
+              d.innerHTML = new Date(date).toUTCString();
+
+              news.appendChild(article); 
+              article.appendChild(h);
+              article.appendChild(c);
+              article.appendChild(d);
+              article.appendChild(s);
+              article.appendChild(lineBreak);   
+            });
+          }
 
           }
         }
-      };
       
       xhttp.open("GET", "http://content.guardianapis.com/search?show-fields=bodyText&api-key=fe308324-ad4f-4317-a3df-7329ed2b238b", true);
       xhttp.send();
     }
-   
+    console.log(test);
     </script>
   
   </head>
