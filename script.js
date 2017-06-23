@@ -1,4 +1,3 @@
-// This is called when the HTML body loads.
 
 var fullTextArray = [];
 
@@ -16,6 +15,7 @@ function openLightbox (element) {
   };
 }
 
+// This is called when the HTML body loads.
 function loadContent() {
 
     var news = document.getElementById("news");
@@ -31,7 +31,7 @@ function loadContent() {
                 }
             }
         };
-        request.open("GET", "http://content.guardianapis.com/search?show-fields=bodyText&api-key=fe308324-ad4f-4317-a3df-7329ed2b238b", true);
+        request.open("GET", "http://content.guardianapis.com/search?show-fields=bodyText,thumbnail&api-key=fe308324-ad4f-4317-a3df-7329ed2b238b", true);
         request.send();
     }
 
@@ -56,6 +56,8 @@ function loadContent() {
         var category = articlesArray[articleIndex].sectionName;
         var date = articlesArray[articleIndex].webPublicationDate;
         var url = articlesArray[articleIndex].webUrl;
+        var thumbnailSrc = articlesArray[articleIndex].fields.thumbnail;
+        console.log(thumbnailSrc);
 
         var bodyText = articlesArray[articleIndex].fields.bodyText;
         fullTextArray.push(bodyText);
@@ -66,11 +68,13 @@ function loadContent() {
         var textContent = document.createElement("p");
         var headlineHTML = document.createElement("summary");
         var categoryAndDateHTML = document.createElement("p");
+        var image = document.createElement("img");
         var lineBreak = document.createElement("br");
 
         // Assign classes or IDs to newly generated HTML elements for testing and styling.
         article.setAttribute("class", "article");
         headlineHTML.setAttribute("class", "headline");
+        image.setAttribute("class", "thumbnail");
         categoryAndDateHTML.setAttribute("class", "category-and-date");
         textContent.setAttribute("class", "text-content");
         textContent.setAttribute("id", articleIndex);
@@ -78,6 +82,7 @@ function loadContent() {
 
         // Inject article data into HTMl elements.
         headlineHTML.innerHTML = headline;
+        image.setAttribute("src", thumbnailSrc);
         categoryAndDateHTML.innerHTML = category + " - " + new Date(date).toUTCString();
 
         summarizeText(url, function(summary) {
@@ -87,6 +92,7 @@ function loadContent() {
             // Structure separate HTML elements correctly inside article.
             news.appendChild(article);
             article.appendChild(categoryAndDateHTML);
+            article.appendChild(image);
             article.appendChild(articleDetails);
             articleDetails.appendChild(headlineHTML);
             articleDetails.appendChild(textContent);

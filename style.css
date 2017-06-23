@@ -1,11 +1,16 @@
 .headline {
     color: black;
-    font-size: 20px;
+    font-size: 26px;
     font-weight: bold;
 }
 
+#header {
+    text-we
+}
+
 body {
-  overflow: scroll;
+    overflow: scroll;
+    text-align: center;
 }
 
 .article {
@@ -13,6 +18,7 @@ body {
     padding: 10px;
     margin-bottom: 15px;
     background-color: ghostwhite;
+    width: 800px;
 }
 
 .text-content {
@@ -38,15 +44,30 @@ body {
     text-align: justify;
     max-width: 60%;
     position: relative;
-    /*-webkit-column-count: 3;
+    -webkit-column-count: 3;
     -moz-column-count: 3;
     column-count: 3;
 
+
     -webkit-column-gap: 10px;
     -moz-column-gap: 10px;
-    column-gap: 10px;*/
+    column-gap: 10px;
 }
 
 #article-view {
   padding: 30px;
+}
+
+#news {
+    margin: 0 auto;
+    width: 800px;
+}
+
+.thumbnail {
+    width: 700px;
+    margin: 10px;
+}
+
+.category-and-date {
+    font-style: italic;
 }
