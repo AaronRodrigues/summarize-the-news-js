@@ -1,13 +1,12 @@
 .headline {
-  color: darkblue;
-  font-size: 20px;
-  font-weight: bold;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.category {
-  color: darkred;
-}
-
-.date {
-  color: darkcyan;
+.article {
+    border: 1px solid dimgrey;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: ghostwhite;
 }
