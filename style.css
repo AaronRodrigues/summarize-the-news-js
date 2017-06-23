@@ -4,12 +4,20 @@
   font-weight: bold;
 }
 
+body {
+  overflow: scroll;
+}
+
 .category {
   color: darkred;
 }
 
 .date {
   color: darkcyan;
+}
+
+.text-content {
+  cursor: pointer;
 }
 
 #lightbox {
@@ -22,14 +30,24 @@
     margin: auto;
     position: fixed;
     z-index: 99;
-    padding-top: 30vh;
+    overflow: scroll;
 }
 
 .inner {
     background-color: ghostwhite;
     margin: 0 auto;
-    text-align: center;
-    width: 400px;
-    height: 50px;
+    text-align: justify;
+    max-width: 60%;
     position: relative;
+    /*-webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+
+    -webkit-column-gap: 10px;
+    -moz-column-gap: 10px;
+    column-gap: 10px;*/
+}
+
+#article-view {
+  padding: 30px;
 }
