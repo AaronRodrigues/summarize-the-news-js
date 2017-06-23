@@ -1,4 +1,5 @@
 // This is called when the HTML body loads.
+
 var fullTextArray = [];
 
 function openLightbox (element) {
@@ -50,15 +51,15 @@ function loadContent() {
     // Construct HTML elements, populate them with data from the API calls and render them on the view.
     function renderArticle(articlesArray, articleIndex) {
 
-
-
         // Grab article data from array of articles and assign to variables for later use.
         var headline = articlesArray[articleIndex].webTitle;
         var category = articlesArray[articleIndex].sectionName;
         var date = articlesArray[articleIndex].webPublicationDate;
         var url = articlesArray[articleIndex].webUrl;
+
         var bodyText = articlesArray[articleIndex].fields.bodyText;
         fullTextArray.push(bodyText);
+
         // Create HTML elements to later populate with article data.
         var article = document.createElement("article");
         var articleDetails = document.createElement("details");
