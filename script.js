@@ -1,4 +1,21 @@
 // This is called when the HTML body loads.
+
+var fullTextArray = [];
+
+function openLightbox (element) {
+
+  var lightbox = document.getElementById('lightbox');
+  var id = element.getAttribute("id");
+  document.getElementById('article-view').innerHTML = fullTextArray[id];
+  body = document.getElementsByTagName("body")[0]
+  body.style.overflow = "hidden";
+  lightbox.style.visibility = 'visible';
+  lightbox.onclick = function() {
+    lightbox.style.visibility = 'hidden';
+    body.style.overflow = "scroll";
+  };
+}
+
 function loadContent() {
 
     var news = document.getElementById("news");
@@ -40,6 +57,9 @@ function loadContent() {
         var date = articlesArray[articleIndex].webPublicationDate;
         var url = articlesArray[articleIndex].webUrl;
 
+        var bodyText = articlesArray[articleIndex].fields.bodyText;
+        fullTextArray.push(bodyText);
+
         // Create HTML elements to later populate with article data.
         var article = document.createElement("article");
         var articleDetails = document.createElement("details");
@@ -53,6 +73,8 @@ function loadContent() {
         headlineHTML.setAttribute("class", "headline");
         categoryAndDateHTML.setAttribute("class", "category-and-date");
         textContent.setAttribute("class", "text-content");
+        textContent.setAttribute("id", articleIndex);
+        textContent.setAttribute("onclick", "openLightbox(this)");
 
         // Inject article data into HTMl elements.
         headlineHTML.innerHTML = headline;

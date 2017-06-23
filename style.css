@@ -4,9 +4,49 @@
     font-weight: bold;
 }
 
+body {
+  overflow: scroll;
+}
+
 .article {
     border: 1px solid dimgrey;
     padding: 10px;
     margin-bottom: 15px;
     background-color: ghostwhite;
+}
+
+.text-content {
+  cursor: pointer;
+}
+
+#lightbox {
+    visibility: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    left: 0;
+    top: 0;
+    margin: auto;
+    position: fixed;
+    z-index: 99;
+    overflow: scroll;
+}
+
+.inner {
+    background-color: ghostwhite;
+    margin: 0 auto;
+    text-align: justify;
+    max-width: 60%;
+    position: relative;
+    /*-webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+
+    -webkit-column-gap: 10px;
+    -moz-column-gap: 10px;
+    column-gap: 10px;*/
+}
+
+#article-view {
+  padding: 30px;
 }
