@@ -31,7 +31,7 @@ To make my news reading more fun
 - Javascript
 - HTML
 - CSS
-- [t.e.s.t.s™](https://rawgit.com/rogrenke/testFramework-js/master/helpers.js) (the extremely simple testing suite) ;)
+- [t:e.s.t.s™](https://rawgit.com/rogrenke/testFramework-js/master/helpers.js) (tests:extremely simple testing suite) ;)
 
 
 ## Contributors
